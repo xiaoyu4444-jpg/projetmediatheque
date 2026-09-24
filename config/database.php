@@ -7,7 +7,7 @@ $host = "localhost"; // Server name sur SSMS
 $dbname = "mediatheque";
 
 $dsn = "$source:Server=$host;Database=$dbname;TrustServerCertificate=true";
-$user = "demo_user";
+$user = "mediatheque_user";
 $pass = "Test1234=";
 $options = [
   PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

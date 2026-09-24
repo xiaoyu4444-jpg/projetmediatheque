@@ -1,10 +1,19 @@
 <?php
 
 // créer les routes:
-$route=[
 
+$routes = [
 
-
+    '' => [
+      'file' => 'pages/home.php',
+      'title' => 'Accueil'
+    ],
+    
+    'produit' => [
+    'file' => 'pages/produit/list.php',
+    'title' => 'Liste des produits',
+    
+  ],
 
 
 ];
@@ -22,14 +31,15 @@ if ($route === null) {
 }
   
 $file = $route["file"];
-$title = $route["title"];
 
+
+require_once 'config/database.php';
 
 
 // Assembler les parties header et footer 
 
 require_once 'partials/header.php';
-
+require_once $file;  
 require_once 'partials/footer.php';
 
 ?>

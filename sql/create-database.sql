@@ -45,12 +45,12 @@ USE master;
 
 
 GO
-IF SUSER_ID('demo_user') IS NOT NULL
-    DROP LOGIN demo_user;
+IF SUSER_ID('mediatheque_user') IS NOT NULL
+    DROP LOGIN mediatheque_user;
 
 
 GO
-CREATE LOGIN demo_user
+CREATE LOGIN mediatheque_user
     WITH PASSWORD = 'Test1234=', DEFAULT_DATABASE = mediatheque, CHECK_POLICY = OFF;
 
 
@@ -59,15 +59,15 @@ USE mediatheque;
 
 
 GO
-CREATE USER demo_user FOR LOGIN demo_user;
+CREATE USER mediatheque_user FOR LOGIN mediatheque_user;
 
 
 GO
 -- Droits minimaux : lecture + écriture sur les données.
 -- On évite db_owner, qui donnerait tous les droits (dont DROP TABLE).
-ALTER ROLE db_datareader ADD MEMBER demo_user;
+ALTER ROLE db_datareader ADD MEMBER mediatheque_user;
 
-ALTER ROLE db_datawriter ADD MEMBER demo_user;
+ALTER ROLE db_datawriter ADD MEMBER mediatheque_user;
 
 
 GO
