@@ -14,7 +14,7 @@
 <body>
     <!--importer fichier de nvabar  -->
 
-    <?php require_once 'navbar.php' ?>
+    <?php require_once 'partials/navbar.php' ?>
 
 
     <main>

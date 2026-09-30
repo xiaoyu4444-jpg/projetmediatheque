@@ -2,4 +2,4 @@
 
 <p>Vous n'avez pas les autorisations requises pour accéder à la page.</p>
 
-<a href="index.php">Revenir à la page d'accueil.</a>
+<a href="index.php?page=home">Revenir à la page d'accueil.</a>

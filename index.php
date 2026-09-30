@@ -79,16 +79,19 @@ $routes = [
    'register' => [
     'file' => 'pages/auth/register.php',
     'title' => 'S\'enregistrer',
+    'roles' => ['admin'],
   ],
 
   'login' => [
     'file' => 'pages/auth/login.php',
     'title' => 'Se connecter',
+    'roles' => ['admin'],
   ],
 
   'logout' => [
     'file' => 'pages/auth/logout.php',
     'title' => 'Se déconnecter',
+    'roles' => ['admin'],
   ],
 
 
