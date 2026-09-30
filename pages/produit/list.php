@@ -8,32 +8,33 @@ $sql = "SELECT id_produit, nom_de_produit
         FROM produit
         ORDER BY nom_de_produit";
 
-$produit = $pdo->query($sql)->fetchAll();
+$produits = $pdo->query($sql)->fetchAll();
 
 
 ?>
 
 <!-- présenter la liste de produits -->
  
-<h1>  Tous les produits</h1>
+<h1>  Tous les produits (<?=count($produits) ?> produits) </h1>
 
-<?php
-// pages/produit/list.php
 
-$sql = "SELECT id_produit, nom_de_produit 
-        FROM produit 
-        ORDER BY nom_de_produit";
 
-$produit = $pdo->query($sql)->fetchAll();
-?>
 
-<h1 class="titre-page">Tous les produits</h1>
 
-<div class="grille-cartes">
-    <?php foreach ($produit as $p): ?>
-        <div class="carte">
-            <?= htmlspecialchars($p['nom_de_produit']) ?>
-        </div>
-    <?php endforeach; ?>
+
+
+
+<div class="cards">
+
+  <?php foreach ($produits as $produit): ?>
+
+    <article class="card">
+      <h2><?= $produit["nom_de_produit"] ?></h2>
+
+   
+
+    </article>
+
+  <?php endforeach ?>
+
 </div>
-

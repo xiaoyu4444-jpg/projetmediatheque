@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 // créer les routes:
 
 $routes = [
@@ -12,8 +14,90 @@ $routes = [
     'produit' => [
     'file' => 'pages/produit/list.php',
     'title' => 'Liste des produits',
+    'roles' => ['user', 'admin'],
+    ],
+
+
+    'produit-details' => [
+    'file' => 'pages/produit/details.php',
+    'title' => 'detail du produit',
+    'roles' => ['user', 'admin'],
+    ],
+
+     // créer les routes pour CD ,DVD,  JS et JV:
+
+    'cd' => [
+    'file' => 'pages/produit/cd.php',
+    'title' => 'Liste des CD',
+    'roles' => ['user', 'admin'],
+    ],
+
+
+    'dvd' => [
+    'file' => 'pages/produit/dvd.php',
+    'title' => 'Liste des DVD',
+    'roles' => ['user', 'admin'],
+    ],
+
+    'js' => [
+    'file' => 'pages/produit/js.php',
+    'title' => 'Liste des JS',
+    'roles' => ['user', 'admin'],
+    ],
+
+    'jv' => [
+    'file' => 'pages/produit/jv.php',
+    'title' => 'Liste des JV',
+    'roles' => ['user', 'admin'],
+    ],
     
+    // créer les routes pour créer , supprimer, et modier un produit:
+
+    'produit-create' => [
+      'file' => 'pages/produit/create.php',
+      'title' => 'Création d\'un produit', 
+      'roles' => ['admin'],
+    ],
+  
+    'produit-delete' => [
+      'file' => 'pages/produit/produit-delete.php',
+      'title' => 'Suppression d\'un produit',
+      'roles' => ['admin'],
+    ],
+  
+    'produit-edit' => [
+      'file' => 'pages/produit/produit-update.php',
+      'title' => 'Modification d\'un produit',
+      'roles' => ['admin'],
+    ],
+  
+
+  /**
+   * Gestion de l'authentification
+   */
+
+   'register' => [
+    'file' => 'pages/auth/register.php',
+    'title' => 'S\'enregistrer',
   ],
+
+  'login' => [
+    'file' => 'pages/auth/login.php',
+    'title' => 'Se connecter',
+  ],
+
+  'logout' => [
+    'file' => 'pages/auth/logout.php',
+    'title' => 'Se déconnecter',
+  ],
+
+
+
+
+
+
+
+
 
 
 ];
@@ -29,9 +113,31 @@ if ($route === null) {
       'title' => "404 not found"
     ];
 }
-  
-$file = $route["file"];
 
+
+// pour montrer non l'accès user 
+$requiredRoles = $route['roles'] ?? null;
+if ($requiredRoles !== null) {
+
+  if (!isset($_SESSION['user'])) {
+    header("Location: index.php?page=login");
+    exit;
+  }
+
+  if (!in_array($_SESSION['user']['role'], $requiredRoles)) {
+    $route = [
+      'file' => 'pages/errors/forbidden.php',
+      'title' => "403 forbidden"
+    ];
+  }
+}
+
+
+
+
+
+$file = $route["file"];
+$title = $route["title"];
 
 require_once 'config/database.php';
 

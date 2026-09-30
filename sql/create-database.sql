@@ -83,6 +83,8 @@ GO
 DROP TABLE IF EXISTS dbo.possede;
 DROP TABLE IF EXISTS dbo.produit;
 DROP TABLE IF EXISTS dbo.users;
+DROP TABLE IF EXISTS dbo.niveau_primaire;
+DROP TABLE IF EXISTS dbo.type_produit;  
 
 CREATE TABLE users(
    id_utilisateur INT IDENTITY  ,
@@ -92,7 +94,7 @@ CREATE TABLE users(
 );
 
 CREATE TABLE produit(
-   id_produit INT IDENTITY ,
+   id_produit INT IDENTITY (1, 1) NOT NULL ,
    type_produit VARCHAR(50) ,
    nom_de_produit VARCHAR(100) ,
    niveau_primaire VARCHAR(50) ,
@@ -108,18 +110,44 @@ CREATE TABLE possede(
    FOREIGN KEY(id_produit) REFERENCES produit(id_produit)
 );
 
+CREATE TABLE niveau_primaire(
+   id int identity,
+   libelle nvarchar(50) UNIQUE ,
+   PRIMARY KEY(id)
+);
 
+
+
+CREATE TABLE type_produit (
+    id_type INT PRIMARY KEY IDENTITY(1,1),
+    libelle VARCHAR(50) NOT NULL
+);
+GO
+
+INSERT INTO type_produit (libelle) VALUES 
+('CD'), ('DVD'), ('Jeu vidéo'), ('Jeu de société');
+GO
+
+INSERT INTO niveau_primaire (libelle) VALUES 
+('Maternelle (PS-MS)'),
+('Maternelle (MS-GS)'),
+('Maternelle (GS)'),
+('Maternelle (GS)-CP'),
+('CP'),
+('CP-CE1'),
+('CE1-CE2'),
+('CE2-CM1'),
+('CM1-CM2'),
+('Tous niveaux');
 GO
 
 INSERT  INTO dbo.produit (
     nom_de_produit,
     type_produit,
     niveau_primaire,
-    prix
-    
+    prix    
 )
 VALUES
-
 /*
  1. CD À ÉCOUTER (8 produits)
 */
